@@ -1,0 +1,234 @@
+@import "tailwindcss";
+
+:root {
+  --rose-light: #f9e4ec;
+  --rose-soft: #f3d0dc;
+  --rose-burnt: #b76e79;
+  --rose-deep: #9a5562;
+  --cream: #fff9f5;
+  --cream-warm: #f5ebe3;
+  --gold: #c9a962;
+  --gold-soft: #e8d5a3;
+  --chocolate: #3d2c2e;
+  --whatsapp: #6b9e7a;
+  --whatsapp-hover: #5d8f6c;
+  --background: #fff9f5;
+  --foreground: #3d2c2e;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-rose-light: var(--rose-light);
+  --color-rose-soft: var(--rose-soft);
+  --color-rose-burnt: var(--rose-burnt);
+  --color-rose-deep: var(--rose-deep);
+  --color-cream: var(--cream);
+  --color-cream-warm: var(--cream-warm);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-chocolate: var(--chocolate);
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-hover: var(--whatsapp-hover);
+  --font-display: var(--font-cormorant);
+  --font-body: var(--font-outfit);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+.font-display {
+  font-family: var(--font-cormorant), Georgia, serif;
+}
+
+.font-body {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--rose-soft);
+  color: var(--chocolate);
+}
+
+/* Padrão de bolinhas inspirado na logo */
+.bg-dots {
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.85) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.glass-dark {
+  background: rgba(61, 44, 46, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.glow-rose {
+  box-shadow:
+    0 0 60px rgba(183, 110, 121, 0.2),
+    0 25px 50px rgba(183, 110, 121, 0.15);
+}
+
+.glow-gold {
+  box-shadow: 0 0 40px rgba(201, 169, 98, 0.25);
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--cream-warm) 0%,
+    var(--rose-light) 50%,
+    var(--cream-warm) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(2deg);
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 20px rgba(107, 158, 122, 0.28);
+  }
+  50% {
+    transform: scale(1.04);
+    box-shadow: 0 8px 28px rgba(107, 158, 122, 0.38);
+  }
+}
+
+@keyframes logo-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.92;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-logo-breathe {
+  animation: logo-breathe 2.5s ease-in-out infinite;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2.5s ease-in-out infinite;
+}
+
+.bg-whatsapp {
+  background-color: var(--whatsapp);
+}
+
+.bg-whatsapp:hover {
+  background-color: var(--whatsapp-hover);
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--rose-burnt), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-padding {
+  @apply px-5 py-20 sm:px-8 md:py-28 lg:px-12;
+}
+
+/* Masonry premium — galeria */
+.gallery-masonry {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 140px;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .gallery-masonry {
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 160px;
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .gallery-masonry {
+    grid-auto-rows: 180px;
+    gap: 1.25rem;
+  }
+}
+
+.gallery-item-tall {
+  grid-row: span 2;
+}
+
+.gallery-item-wide {
+  grid-column: span 2;
+}
+
+@media (max-width: 639px) {
+  .gallery-item-wide {
+    grid-column: span 1;
+  }
+}
+
+.gallery-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    125deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+
+.group:hover .gallery-shine::after {
+  opacity: 1;
+}
