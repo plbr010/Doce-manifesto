@@ -1,0 +1,11 @@
+{
+  "name": "doce-manifesto",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix doce-manifesto-site",
+    "build": "npm run build --prefix doce-manifesto-site",
+    "start": "npm run start --prefix doce-manifesto-site",
+    "lint": "npm run lint --prefix doce-manifesto-site",
+    "install:site": "npm install --prefix doce-manifesto-site"
+  }
+}
