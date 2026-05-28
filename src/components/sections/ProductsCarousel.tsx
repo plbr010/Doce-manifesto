@@ -58,12 +58,17 @@ function ProductCard({ product }: { product: (typeof products)[0] }) {
 }
 
 export function ProductsCarousel() {
+  const [mounted, setMounted] = useState(false);
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { loop: true, align: "start", dragFree: true, slidesToScroll: 1 },
-    [Autoplay({ delay: 4500, stopOnInteraction: false })],
+    mounted ? [Autoplay({ delay: 4500, stopOnInteraction: false })] : [],
   );
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);

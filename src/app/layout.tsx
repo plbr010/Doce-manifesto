@@ -20,6 +20,11 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000",
+  ),
   title: "Doce Manifesto | Confeitaria Gourmet em Muriaé",
   description:
     "Brownies artesanais, doces gourmet e experiências premium. Doce Manifesto — adoçando momentos com atitude. Peça pelo WhatsApp!",

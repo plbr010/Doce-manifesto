@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 import { cn } from "@/lib/utils";
 
@@ -30,11 +30,18 @@ export function PremiumImage({
   sizes = "(max-width: 768px) 100vw, 33vw",
   placeholderVariant = "rose",
 }: PremiumImageProps) {
-  const [loaded, setLoaded] = useState(false);
+  const isLocal = src.startsWith("/");
+  const [loaded, setLoaded] = useState(isLocal);
   const [failed, setFailed] = useState(false);
 
   const markLoaded = useCallback(() => setLoaded(true), []);
   const markFailed = useCallback(() => setFailed(true), []);
+
+  useEffect(() => {
+    if (loaded || failed) return;
+    const timeout = window.setTimeout(() => setLoaded(true), 4000);
+    return () => window.clearTimeout(timeout);
+  }, [loaded, failed]);
 
   if (failed) {
     return (
@@ -65,9 +72,9 @@ export function PremiumImage({
         fill={fill}
         width={!fill ? width : undefined}
         height={!fill ? height : undefined}
-        unoptimized={src.startsWith("/")}
+        unoptimized={isLocal}
         className={cn(
-          "object-cover transition-all duration-700",
+          "object-cover transition-opacity duration-500",
           fill && "absolute inset-0 h-full w-full",
           loaded ? "opacity-100" : "opacity-0",
           className,
@@ -76,7 +83,6 @@ export function PremiumImage({
         priority={priority}
         loading={priority ? "eager" : "lazy"}
         onLoad={markLoaded}
-        onLoadingComplete={markLoaded}
         onError={markFailed}
       />
     </div>
