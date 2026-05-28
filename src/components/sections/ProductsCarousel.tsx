@@ -4,7 +4,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, ShoppingBag } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { PremiumImage } from "@/components/ui/PremiumImage";
 import { StarRating } from "@/components/ui/StarRating";
@@ -58,17 +58,16 @@ function ProductCard({ product }: { product: (typeof products)[0] }) {
 }
 
 export function ProductsCarousel() {
-  const [mounted, setMounted] = useState(false);
+  const emblaPlugins = useMemo(
+    () => [Autoplay({ delay: 4500, stopOnInteraction: false })],
+    [],
+  );
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { loop: true, align: "start", dragFree: true, slidesToScroll: 1 },
-    mounted ? [Autoplay({ delay: 4500, stopOnInteraction: false })] : [],
+    emblaPlugins,
   );
-  const [canPrev, setCanPrev] = useState(false);
-  const [canNext, setCanNext] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const [canPrev, setCanPrev] = useState(true);
+  const [canNext, setCanNext] = useState(true);
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
@@ -86,6 +85,7 @@ export function ProductsCarousel() {
     emblaApi.on("reInit", onSelect);
     return () => {
       emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onSelect);
     };
   }, [emblaApi, onSelect]);
 

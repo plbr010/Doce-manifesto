@@ -37,12 +37,13 @@ export function Header() {
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-12">
-        <Link href="#" className="flex shrink-0 items-center">
+        <Link href="/" className="flex shrink-0 items-center">
           <Image
             src={LOGO}
             alt="Doce Manifesto — logo com borboleta"
             width={200}
             height={200}
+            unoptimized
             className="h-14 w-auto object-contain sm:h-[4.5rem]"
             priority
           />
@@ -50,20 +51,20 @@ export function Header() {
 
         <nav className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
-            <Link
+            <a
               key={link.href}
               href={link.href}
               className="text-sm font-medium text-chocolate/80 transition-colors hover:text-rose-burnt"
             >
               {link.label}
-            </Link>
+            </a>
           ))}
-          <Link
+          <a
             href="#pedido"
             className="rounded-full bg-gradient-to-r from-rose-burnt to-rose-deep px-5 py-2 text-sm font-medium text-white shadow-md shadow-rose-burnt/25 transition-transform hover:scale-105"
           >
             Pedir agora
-          </Link>
+          </a>
         </nav>
 
         <button
@@ -83,22 +84,22 @@ export function Header() {
           animate={{ opacity: 1, y: 0 }}
         >
           {navLinks.map((link) => (
-            <Link
+            <a
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
               className="rounded-xl px-4 py-3 text-sm font-medium text-chocolate hover:bg-rose-light/50"
             >
               {link.label}
-            </Link>
+            </a>
           ))}
-          <Link
+          <a
             href="#pedido"
             onClick={() => setOpen(false)}
             className="mt-1 rounded-full bg-rose-burnt px-4 py-3 text-center text-sm font-medium text-white"
           >
             Pedir agora
-          </Link>
+          </a>
         </motion.nav>
       )}
     </motion.header>

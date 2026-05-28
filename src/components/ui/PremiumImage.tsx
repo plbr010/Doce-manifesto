@@ -30,18 +30,21 @@ export function PremiumImage({
   sizes = "(max-width: 768px) 100vw, 33vw",
   placeholderVariant = "rose",
 }: PremiumImageProps) {
-  const isLocal = src.startsWith("/");
-  const [loaded, setLoaded] = useState(isLocal);
+  const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
 
-  const markLoaded = useCallback(() => setLoaded(true), []);
-  const markFailed = useCallback(() => setFailed(true), []);
+  const markLoaded = useCallback(() => {
+    setLoaded(true);
+  }, []);
+
+  const markFailed = useCallback(() => {
+    setFailed(true);
+  }, []);
 
   useEffect(() => {
-    if (loaded || failed) return;
-    const timeout = window.setTimeout(() => setLoaded(true), 4000);
-    return () => window.clearTimeout(timeout);
-  }, [loaded, failed]);
+    setLoaded(false);
+    setFailed(false);
+  }, [src]);
 
   if (failed) {
     return (
@@ -72,9 +75,9 @@ export function PremiumImage({
         fill={fill}
         width={!fill ? width : undefined}
         height={!fill ? height : undefined}
-        unoptimized={isLocal}
+        unoptimized={src.startsWith("/")}
         className={cn(
-          "object-cover transition-opacity duration-500",
+          "object-cover transition-all duration-700",
           fill && "absolute inset-0 h-full w-full",
           loaded ? "opacity-100" : "opacity-0",
           className,

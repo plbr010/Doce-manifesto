@@ -16,12 +16,13 @@ export function Footer() {
     <footer className="border-t border-rose-light/80 bg-cream px-5 py-14 sm:px-8 lg:px-12">
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-8 text-center md:flex-row md:justify-between md:text-left">
         <div className="flex flex-col items-center gap-3 md:items-start">
-          <Link href="#" className="flex items-center">
+          <Link href="/" className="flex items-center">
             <Image
               src={LOGO}
               alt="Doce Manifesto — logo com borboleta"
               width={220}
               height={220}
+              unoptimized
               className="h-24 w-auto object-contain sm:h-28"
             />
           </Link>

@@ -67,6 +67,13 @@ export function Button({
         </motion.a>
       );
     }
+    if (href.startsWith("#")) {
+      return (
+        <motion.a href={href} className={classes} {...motionProps}>
+          {children}
+        </motion.a>
+      );
+    }
     return (
       <motion.div {...motionProps} className="inline-block">
         <Link href={href} className={classes}>

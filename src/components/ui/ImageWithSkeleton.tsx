@@ -57,8 +57,8 @@ export function ImageWithSkeleton({
         sizes={sizes}
         priority={priority}
         loading={priority ? "eager" : "lazy"}
+        unoptimized={src.startsWith("/")}
         onLoad={markLoaded}
-        onLoadingComplete={markLoaded}
         onError={markLoaded}
       />
     </div>

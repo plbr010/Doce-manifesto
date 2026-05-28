@@ -7,6 +7,8 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { Footer } from "@/components/sections/Footer";
 
+export const dynamic = "force-static";
+
 export default function Home() {
   return (
     <>
