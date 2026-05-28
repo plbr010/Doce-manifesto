@@ -5,7 +5,6 @@ Site institucional da confeitaria **Doce Manifesto**, desenvolvido com Next.js 1
 ## Como rodar
 
 ```bash
-cd doce-manifesto-site
 npm install
 npm run dev
 ```
